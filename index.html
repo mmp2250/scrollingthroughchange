@@ -41,7 +41,9 @@
     }
 
     .top {
-      max-width: var(--content-max);
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      max-width: calc(var(--content-max) + var(--sidebar-width) + 56px);
       margin: 0 auto;
       padding: 56px 56px 40px;
     }
@@ -103,8 +105,9 @@
     }
 
     .sidebar {
-      padding: 40px 28px 40px 0;
-      border-right: 1px solid var(--line);
+      padding: 40px 28px 0 0;
+      border-right: 1px solid var(--line)
+      height: fit-content;
     }
 
     .sidebar h3 {
@@ -201,7 +204,7 @@
       <div class="meta-row">
         <div>
           <div class="meta-label">AUTHORS</div>
-          <div class="meta-value">Maya Patel, Vyshu Telukuntla</div>
+          <div class="meta-value">Maya Patel & Vyshu Telukuntla</div>
         </div>
 
         <div>
