@@ -15,8 +15,8 @@
       --panel: #ffffff;
       --text: #000000;
       --line: #d9d9d4;
-      --content-max: 900px;
-      --sidebar-width: 135px;
+      --content-max: 940px;
+      --sidebar-width: 150px;
       --page-padding: 12px;
       --content-offset: 8px;
     }
@@ -52,8 +52,8 @@
 
     .hero {
       text-align: left;
-      padding-left: var(--content-offset);
-      max-width: 640px;
+      padding-left: 18px;
+      max-width: 700px;
     }
 
     h1 {
@@ -67,7 +67,7 @@
     .hero-meta {
       margin-top: 24px;
       margin-bottom: 0;
-      max-width: 640px;
+      max-width: 700px;
       font-weight: 300;
       font-size: 1.2rem;
       line-height: 1.55em;
@@ -145,8 +145,8 @@
     }
 
     .main {
-      padding: 20px 0 80px var(--content-offset);
-      max-width: 640px;
+      padding: 20px 0 80px 18px;
+      max-width: 700px;
       margin-right: 0;
     }
 
@@ -156,7 +156,7 @@
     }
 
     h2 {
-      margin: 0 0 16px 0;
+      margin: 0 0 24px 0;
       font-size: 28px;
       font-weight: 700;
     }
@@ -164,7 +164,7 @@
     .divider {
       border: 0;
       border-top: 1px solid var(--line);
-      margin: 0 0 28px;
+      margin: 0 0 24px;
     }
 
     p {
@@ -196,10 +196,11 @@
 
       .meta-content {
         grid-column: 2;
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding-left: var(--content-offset);
-        max-width: 640px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 56px;
+        padding-left: 18px;
+        max-width: 700px;
       }
 
       .bottom {
@@ -208,9 +209,9 @@
       }
 
       .sidebar {
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-        padding: 28px 0;
+        padding: 28px 18px 0 0;
+        border-right: 1px solid var(--line);
+        height: fit-content;
       }
 
       .main {
