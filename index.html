@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scrolling Through Change</title>
 
-  <!-- Close match to the font in your screenshot -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #ffffff;
       --panel: #ffffff;
-      --text: #23262b;
-      --muted: #61656c;
+      --text: #000000;
       --line: #d9d9d4;
-      --accent: #0f7a67;
       --content-max: 920px;
-      --sidebar-width: 330px;
+      --sidebar-width: 260px;
+      --top-height: 300px;
     }
 
     * {
@@ -33,172 +32,95 @@
       margin: 0;
       font-family: "Roboto", sans-serif;
       background: var(--bg);
-      color: black;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr;
+    .page {
       min-height: 100vh;
     }
 
-    .sidebar {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      padding: 36px 28px 36px 34px;
-      border-right: 1px solid var(--line);
-      background: var(--panel);
-    }
-
-    .site-title {
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.15;
-      margin: 0 0 28px 0;
-      letter-spacing: -0.02em;
-    }
-
-    .search {
-      width: 100%;
-      height: 44px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: white;
-      padding: 0 14px;
-      font-size: 15px;
-      color: var(--text);
-      margin-bottom: 28px;
-      outline: none;
-    }
-
-    .nav-section {
-      margin-bottom: 16px;
-    }
-
-    .nav-label {
-      display: block;
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 10px;
-      text-decoration: none;
-    }
-
-    details {
-      margin-bottom: 8px;
-    }
-
-    summary {
-      list-style: none;
-      cursor: pointer;
-      font-size: 17px;
-      font-weight: 500;
-      color: #3d4148;
-      padding: 6px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary::after {
-      content: "⌄";
-      font-size: 18px;
-      color: #7a7f87;
-      margin-left: 10px;
-    }
-
-    details[open] summary::after {
-      content: "⌃";
-    }
-
-    .subnav {
-      margin: 4px 0 10px 0;
-      padding-left: 10px;
-    }
-
-    .subnav a {
-      display: block;
-      text-decoration: none;
-      color: #4e535a;
-      font-size: 16px;
-      line-height: 1.35;
-      padding: 5px 0;
-    }
-
-    .subnav a:hover,
-    .subnav a.active {
-      color: var(--accent);
-    }
-
-    .main {
-      padding: 46px 56px 80px;
-    }
-
-    .content {
+    .top {
       max-width: var(--content-max);
       margin: 0 auto;
+      padding: 56px 56px 40px;
     }
 
     .hero {
       text-align: left;
-      margin-bottom: 52px;
     }
 
     h1 {
       margin: 0 0 0.5rem;
       font-size: 40px;
-      line-height: 1.1em;
       font-weight: 700;
+      line-height: 1.1em;
       letter-spacing: -0.02em;
     }
 
-     .hero-meta {
+    .hero-meta {
       font-weight: 300;
       font-size: 1.2rem;
       line-height: 1.55em;
       margin-top: 0;
-      margin-bottom: 1em;
+      margin-bottom: 0;
       max-width: 900px;
     }
 
-    .quote {
-      font-size: 23px;
-      line-height: 1.65;
-      color: #5b6168;
-      margin: 10px 0 48px;
-      padding-left: 28px;
-      border-left: 6px solid #e2e2dc;
+    .rule {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 0;
     }
 
-    .quote em {
-      display: inline-block;
-      margin-top: 10px;
-      color: #5b6168;
+    .bottom {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      max-width: calc(var(--content-max) + var(--sidebar-width) + 56px);
+      margin: 0 auto;
+    }
+
+    .sidebar {
+      padding: 40px 28px 40px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .sidebar h3 {
+      margin: 0 0 22px;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .sidebar nav a {
+      display: block;
+      text-decoration: none;
+      color: #000;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.4;
+      padding: 8px 0;
+    }
+
+    .sidebar nav a:hover {
+      text-decoration: underline;
+    }
+
+    .main {
+      padding: 40px 0 80px 42px;
+      max-width: var(--content-max);
     }
 
     section {
       margin-bottom: 52px;
-      scroll-margin-top: 40px;
+      scroll-margin-top: 30px;
     }
 
     h2 {
       margin: 0 0 16px 0;
-      font-size: 36px;
+      font-size: 28px;
       line-height: 1.15;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    h3 {
-      margin: 28px 0 10px 0;
-      font-size: 24px;
-      line-height: 1.2;
       font-weight: 700;
       letter-spacing: -0.02em;
     }
@@ -206,138 +128,113 @@
     .divider {
       border: 0;
       border-top: 1px solid var(--line);
-      margin: 14px 0 28px;
+      margin: 0 0 28px;
     }
 
     p {
       margin: 0 0 18px 0;
       font-size: 18px;
       line-height: 1.72;
-      color: #363b42;
+      color: #000;
+      font-weight: 300;
     }
 
-    .details-line {
-      font-size: 18px;
-      line-height: 1.65;
-      color: #2f3339;
-      margin-bottom: 10px;
-    }
+    @media (max-width: 900px) {
+      .top {
+        padding: 36px 22px 28px;
+      }
 
-    .details-line strong {
-      font-weight: 800;
-    }
-
-    figure {
-      margin: 28px 0 36px;
-    }
-
-    figure img {
-      width: 100%;
-      border-radius: 10px;
-      display: block;
-      border: 1px solid #ddd;
-      background: white;
-    }
-
-    figcaption {
-      text-align: center;
-      font-size: 14px;
-      color: #6f747b;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 1000px) {
-      .layout {
+      .bottom {
         grid-template-columns: 1fr;
       }
 
       .sidebar {
-        position: relative;
-        height: auto;
         border-right: none;
         border-bottom: 1px solid var(--line);
+        padding: 28px 22px;
       }
 
       .main {
-        padding: 32px 22px 60px;
+        padding: 28px 22px 60px;
       }
 
       h1 {
-        font-size: 46px;
+        font-size: 34px;
       }
 
       .hero-meta {
-        font-size: 19px;
-      }
-
-      .quote {
-        font-size: 20px;
+        font-size: 1.05rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="site-title">Scrolling Through Change: How Major Societal Events Reshape Instagram Language</div>
-
-      <input class="search" type="text" placeholder="Search" />
-
-      <nav>
-        <div class="nav-section">
-          <a class="nav-label" href="#overview">Overview</a>
+  <div class="page">
+    <div class="top">
+      <div class="hero">
+        <h1>Scrolling Through Change</h1>
+        <div class="hero-meta">
+          Can a language model detect belief shifts in Instagram captioning before versus after major political events, focusing on the 2016 U.S. election, and does the detection of belief shifts differ between influencer accounts and political figure accounts?
         </div>
-
-        <details open>
-          <summary>Background</summary>
-          <div class="subnav">
-            <a href="#motivation">Motivation</a>
-            <a href="#context">Context</a>
-          </div>
-        </details>
-
-        <details open>
-          <summary>Methods</summary>
-          <div class="subnav">
-            <a href="#approach">Approach</a>
-            <a href="#data">Data</a>
-          </div>
-        </details>
-
-        <details open>
-          <summary>Results</summary>
-          <div class="subnav">
-            <a href="#findings">Findings</a>
-            <a href="#discussion">Discussion</a>
-          </div>
-        </details>
-
-        <details open>
-          <summary>Conclusion</summary>
-          <div class="subnav">
-            <a href="#takeaways">Takeaways</a>
-            <a href="#references">References</a>
-          </div>
-        </details>
-      </nav>
-    </aside>
-
-    <main class="main">
-      <div class="content">
-        <div class="hero" id="overview">
-          <h1>Scrolling Through Change</h1>
-          <div class="hero-meta">
-              Through this project, we ask: Can a language model detect belief shifts in Instagram captioning before versus after major political events, focusing on the 2016 U.S. election, and does the detection of belief shifts differ between influencer accounts and political figure accounts?</div>
-        </section>
-
-        <section id="references">
-          <h2>References</h2>
-          <hr class="divider">
-          <p>[1] First source.</p>
-          <p>[2] Second source.</p>
-        </section>
       </div>
-    </main>
+    </div>
+
+    <hr class="rule">
+
+    <div class="bottom">
+      <aside class="sidebar">
+        <h3>Contents</h3>
+        <nav>
+          <a href="#introduction">Introduction</a>
+          <a href="#background">Background</a>
+          <a href="#experiment">Experiment</a>
+          <a href="#results">Results</a>
+          <a href="#conclusion">Conclusion</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <section id="introduction">
+          <h2>Introduction</h2>
+          <hr class="divider">
+          <p>
+            Add your introduction here.
+          </p>
+        </section>
+
+        <section id="background">
+          <h2>Background</h2>
+          <hr class="divider">
+          <p>
+            Add your background here.
+          </p>
+        </section>
+
+        <section id="experiment">
+          <h2>Experiment</h2>
+          <hr class="divider">
+          <p>
+            Add your experiment section here.
+          </p>
+        </section>
+
+        <section id="results">
+          <h2>Results</h2>
+          <hr class="divider">
+          <p>
+            Add your results here.
+          </p>
+        </section>
+
+        <section id="conclusion">
+          <h2>Conclusion</h2>
+          <hr class="divider">
+          <p>
+            Add your conclusion here.
+          </p>
+        </section>
+      </main>
+    </div>
   </div>
 </body>
 </html>
