@@ -18,6 +18,7 @@
       --content-max: 920px;
       --sidebar-width: 260px;
       --page-padding: 56px;
+      --content-offset: 42px;
     }
 
     * {
@@ -51,6 +52,7 @@
 
     .hero {
       text-align: left;
+      padding-left: var(--content-offset);
     }
 
     h1 {
@@ -91,6 +93,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 40px;
+      padding-left: var(--content-offset);
     }
 
     .meta-label {
@@ -140,7 +143,7 @@
     }
 
     .main {
-      padding: 40px 0 80px 42px;
+      padding: 40px 0 80px var(--content-offset);
       max-width: var(--content-max);
     }
 
@@ -171,11 +174,16 @@
     @media (max-width: 900px) {
       :root {
         --page-padding: 22px;
+        --content-offset: 0px;
       }
 
       .top {
         grid-template-columns: 1fr;
         padding: 36px var(--page-padding) 28px;
+      }
+
+      .hero {
+        padding-left: 0;
       }
 
       .meta-inner {
@@ -187,6 +195,7 @@
         grid-column: 1;
         grid-template-columns: 1fr;
         gap: 20px;
+        padding-left: 0;
       }
 
       .bottom {
