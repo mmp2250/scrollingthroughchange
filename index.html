@@ -1,243 +1,413 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Scrolling Through Change</title>
+
+  <!-- Close match to the font in your screenshot -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg: #f5f5f3;
+      --panel: #f5f5f3;
+      --text: #23262b;
+      --muted: #61656c;
+      --line: #d9d9d4;
+      --accent: #0f7a67;
+      --content-max: 920px;
+      --sidebar-width: 330px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      background: #f5f7fb;
-      color: #222;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.7;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
 
-    a {
-      color: #0e7862;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
+    .layout {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 28px;
-      padding: 24px 20px 60px;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      min-height: 100vh;
     }
 
     .sidebar {
       position: sticky;
-      top: 24px;
-      align-self: start;
-      font-size: 14px;
-      color: #444;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 36px 28px 36px 34px;
+      border-right: 1px solid var(--line);
+      background: var(--panel);
     }
 
-    .sidebar h3 {
+    .site-title {
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.15;
+      margin: 0 0 28px 0;
+      letter-spacing: -0.02em;
+    }
+
+    .search {
+      width: 100%;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+      padding: 0 14px;
       font-size: 15px;
-      margin: 0 0 12px;
-    }
-
-    .sidebar .block {
+      color: var(--text);
       margin-bottom: 28px;
+      outline: none;
     }
 
-    .sidebar a {
+    .nav-section {
+      margin-bottom: 16px;
+    }
+
+    .nav-label {
       display: block;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    details {
       margin-bottom: 8px;
     }
 
-    .article {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 28px 36px 48px;
-      max-width: 900px;
+    summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 500;
+      color: #3d4148;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .top-meta {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #666;
-      margin-bottom: 18px;
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "⌄";
+      font-size: 18px;
+      color: #7a7f87;
+      margin-left: 10px;
+    }
+
+    details[open] summary::after {
+      content: "⌃";
+    }
+
+    .subnav {
+      margin: 4px 0 10px 0;
+      padding-left: 10px;
+    }
+
+    .subnav a {
+      display: block;
+      text-decoration: none;
+      color: #4e535a;
+      font-size: 16px;
+      line-height: 1.35;
+      padding: 5px 0;
+    }
+
+    .subnav a:hover,
+    .subnav a.active {
+      color: var(--accent);
+    }
+
+    .main {
+      padding: 46px 56px 80px;
+    }
+
+    .content {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 52px;
     }
 
     h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 42px;
-      line-height: 1.15;
-      font-weight: 500;
-      margin: 0 0 14px;
+      margin: 0 0 20px 0;
+      font-size: 64px;
+      line-height: 1.02;
+      font-weight: 800;
+      letter-spacing: -0.04em;
     }
 
-    .authors {
-      font-size: 17px;
-      margin-bottom: 6px;
+    .hero-meta {
+      font-size: 22px;
+      line-height: 1.55;
+      color: #2f3339;
     }
 
-    .submeta {
-      font-size: 15px;
-      color: #555;
-      margin-bottom: 28px;
+    .quote {
+      font-size: 23px;
+      line-height: 1.65;
+      color: #5b6168;
+      margin: 10px 0 48px;
+      padding-left: 28px;
+      border-left: 6px solid #e2e2dc;
     }
 
-    hr {
-      border: 0;
-      border-top: 1px solid #ddd;
-      margin: 24px 0;
+    .quote em {
+      display: inline-block;
+      margin-top: 10px;
+      color: #5b6168;
+    }
+
+    section {
+      margin-bottom: 52px;
+      scroll-margin-top: 40px;
     }
 
     h2 {
-      font-size: 30px;
-      margin-top: 34px;
-      margin-bottom: 10px;
-      font-weight: 700;
+      margin: 0 0 16px 0;
+      font-size: 36px;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
 
     h3 {
-      font-size: 22px;
-      margin-top: 24px;
-      margin-bottom: 8px;
+      margin: 28px 0 10px 0;
+      font-size: 24px;
+      line-height: 1.2;
       font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 14px 0 28px;
     }
 
     p {
-      font-size: 17px;
-      margin: 0 0 16px;
+      margin: 0 0 18px 0;
+      font-size: 18px;
+      line-height: 1.72;
+      color: #363b42;
+    }
+
+    .details-line {
+      font-size: 18px;
+      line-height: 1.65;
+      color: #2f3339;
+      margin-bottom: 10px;
+    }
+
+    .details-line strong {
+      font-weight: 800;
     }
 
     figure {
-      margin: 28px 0;
+      margin: 28px 0 36px;
     }
 
     figure img {
       width: 100%;
-      height: auto;
+      border-radius: 10px;
       display: block;
       border: 1px solid #ddd;
+      background: white;
     }
 
     figcaption {
-      font-size: 13px;
-      color: #666;
       text-align: center;
-      margin-top: 8px;
+      font-size: 14px;
+      color: #6f747b;
+      margin-top: 10px;
     }
 
-    .references p {
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-
-    @media (max-width: 900px) {
-      .page {
+    @media (max-width: 1000px) {
+      .layout {
         grid-template-columns: 1fr;
       }
 
       .sidebar {
-        position: static;
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
       }
 
-      .article {
-        padding: 24px 20px 36px;
+      .main {
+        padding: 32px 22px 60px;
       }
 
       h1 {
-        font-size: 32px;
+        font-size: 46px;
+      }
+
+      .hero-meta {
+        font-size: 19px;
+      }
+
+      .quote {
+        font-size: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <div class="layout">
     <aside class="sidebar">
-      <div class="block">
-        <h3>Authors</h3>
-        <div>Your Name</div>
-        <div>Your Partner's Name</div>
-      </div>
+      <div class="site-title">Scrolling Through Change</div>
 
-      <div class="block">
-        <h3>Affiliation</h3>
-        <div>MIT</div>
-      </div>
+      <input class="search" type="text" placeholder="Search" />
 
-      <div class="block">
-        <h3>Published</h3>
-        <div>April 2026</div>
-      </div>
+      <nav>
+        <div class="nav-section">
+          <a class="nav-label" href="#overview">Overview</a>
+        </div>
 
-      <div class="block">
-        <h3>Contents</h3>
-        <a href="#background">Background</a>
-        <a href="#methods">Methods</a>
-        <a href="#results">Results</a>
-        <a href="#conclusion">Conclusion</a>
-        <a href="#references">References</a>
-      </div>
+        <details open>
+          <summary>Background</summary>
+          <div class="subnav">
+            <a href="#motivation">Motivation</a>
+            <a href="#context">Context</a>
+          </div>
+        </details>
+
+        <details open>
+          <summary>Methods</summary>
+          <div class="subnav">
+            <a href="#approach">Approach</a>
+            <a href="#data">Data</a>
+          </div>
+        </details>
+
+        <details open>
+          <summary>Results</summary>
+          <div class="subnav">
+            <a href="#findings">Findings</a>
+            <a href="#discussion">Discussion</a>
+          </div>
+        </details>
+
+        <details open>
+          <summary>Conclusion</summary>
+          <div class="subnav">
+            <a href="#takeaways">Takeaways</a>
+            <a href="#references">References</a>
+          </div>
+        </details>
+      </nav>
     </aside>
 
-    <main class="article">
-      <div class="top-meta">Project Report</div>
+    <main class="main">
+      <div class="content">
+        <div class="hero" id="overview">
+          <h1>Scrolling Through Change</h1>
+          <div class="hero-meta">
+            Barnard College<br>
+            Department of Psychology<br>
+            PSYC BC2137
+            <br><br>
+            Spring 2026
+          </div>
+        </div>
 
-      <h1>Scrolling Through Change</h1>
+        <div class="quote">
+          Only when certain events recur in accordance with rules or regularities can our observations be tested—in principle—by anyone.
+          <br>
+          <em>– Karl Popper (1959)</em>
+        </div>
 
-      <div class="authors">
-        Your Name · Your Partner's Name
-      </div>
+        <section id="motivation">
+          <h2>Course details</h2>
+          <hr class="divider">
+          <div class="details-line"><strong>Pre-requisites:</strong> Add yours here</div>
+          <div class="details-line"><strong>Co-requisite:</strong> Add yours here</div>
+        </section>
 
-      <div class="submeta">
-        Final project for 6.7960, MIT
-      </div>
+        <section id="context">
+          <h2>Time, venue & instructor</h2>
+          <hr class="divider">
+          <p>
+            Put the practical course or project information here. This section style matches the clean handbook layout in your screenshot.
+          </p>
+        </section>
 
-      <hr>
+        <section id="approach">
+          <h2>Introduction</h2>
+          <hr class="divider">
+          <p>
+            This is where your long-form article starts. Use this space for your introduction, research question, motivation, and project framing.
+          </p>
+          <p>
+            The visual style here is driven mostly by font choice, spacing, heading weight, and the left navigation structure.
+          </p>
+        </section>
 
-      <h2 id="background">Background</h2>
-      <p>
-        Introduce your topic here. Explain the question, why it matters, and what gap your project is addressing.
-      </p>
+        <section id="data">
+          <h2>Methods</h2>
+          <hr class="divider">
+          <p>
+            Explain your process, data, setup, and workflow here.
+          </p>
 
-      <figure>
-        <img src="images/figure1.png" alt="Project figure">
-        <figcaption>Figure 1. Replace this with your real caption.</figcaption>
-      </figure>
+          <figure>
+            <img src="images/figure1.png" alt="Example figure">
+            <figcaption>Figure 1. Replace with your own image and caption.</figcaption>
+          </figure>
+        </section>
 
-      <h2 id="methods">Methods</h2>
-      <p>
-        Describe your dataset, setup, workflow, or experimental approach.
-      </p>
+        <section id="findings">
+          <h2>Results</h2>
+          <hr class="divider">
+          <p>
+            Present your findings here in the same clean, documentation-style format.
+          </p>
+        </section>
 
-      <h3>Project Plan</h3>
-      <p>
-        Explain what you set out to test and how you structured the work.
-      </p>
+        <section id="discussion">
+          <h2>Discussion</h2>
+          <hr class="divider">
+          <p>
+            Interpret the results, explain what matters, and connect back to your main argument.
+          </p>
+        </section>
 
-      <h2 id="results">Results</h2>
-      <p>
-        Summarize the most important findings and include figures where helpful.
-      </p>
+        <section id="takeaways">
+          <h2>Conclusion</h2>
+          <hr class="divider">
+          <p>
+            End with the main takeaway, limitations, and next steps.
+          </p>
+        </section>
 
-      <figure>
-        <img src="images/figure2.png" alt="Results figure">
-        <figcaption>Figure 2. Example results figure.</figcaption>
-      </figure>
-
-      <h2 id="conclusion">Conclusion</h2>
-      <p>
-        End with your key takeaway, limitations, and future work.
-      </p>
-
-      <h2 id="references">References</h2>
-      <div class="references">
-        <p>[1] First source here.</p>
-        <p>[2] Second source here.</p>
+        <section id="references">
+          <h2>References</h2>
+          <hr class="divider">
+          <p>[1] First source.</p>
+          <p>[2] Second source.</p>
+        </section>
       </div>
     </main>
   </div>
