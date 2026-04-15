@@ -17,6 +17,7 @@
       --line: #d9d9d4;
       --content-max: 920px;
       --sidebar-width: 260px;
+      --page-padding: 56px;
     }
 
     * {
@@ -43,9 +44,9 @@
     .top {
       display: grid;
       grid-template-columns: var(--sidebar-width) 1fr;
-      max-width: calc(var(--content-max) + var(--sidebar-width) + 56px);
+      max-width: calc(var(--content-max) + var(--sidebar-width) + (2 * var(--page-padding)));
       margin: 0 auto;
-      padding: 56px 56px 40px;
+      padding: 56px var(--page-padding) 40px;
     }
 
     .hero {
@@ -61,33 +62,35 @@
     }
 
     .hero-meta {
-      font-weight: 300;
-      margin-top: 18px;
-      font-size: 1.2rem;
-      line-height: 1.55em;
+      margin-top: 24px;
       margin-bottom: 0;
       max-width: 900px;
+      font-weight: 300;
+      font-size: 1.2rem;
+      line-height: 1.55em;
     }
 
-    /* 🔥 META ROW (authors / affiliation) */
     .meta-row {
+      grid-column: 1 / -1;
+      width: 100%;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-top: 36px;
+    }
+
+    .meta-inner {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      max-width: calc(var(--content-max) + var(--sidebar-width) + (2 * var(--page-padding)));
+      margin: 0 auto;
+      padding: 28px var(--page-padding);
+    }
+
+    .meta-content {
+      grid-column: 2;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 40px;
-
-      padding: 28px 56px; /* match page padding */
-
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-
-      margin-top: 36px;
-
-      width: 100%;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
     }
 
     .meta-label {
@@ -100,24 +103,20 @@
     .meta-value {
       font-size: 16px;
       font-weight: 400;
-    }
-
-    .rule {
-      border: 0;
-      border-top: 1px solid var(--line);
-      margin: 0;
+      line-height: 1.4;
     }
 
     .bottom {
       display: grid;
       grid-template-columns: var(--sidebar-width) 1fr;
-      max-width: calc(var(--content-max) + var(--sidebar-width) + 56px);
+      max-width: calc(var(--content-max) + var(--sidebar-width) + (2 * var(--page-padding)));
       margin: 0 auto;
+      padding: 0 var(--page-padding);
     }
 
     .sidebar {
       padding: 40px 28px 0 0;
-      border-right: 1px solid var(--line)
+      border-right: 1px solid var(--line);
       height: fit-content;
     }
 
@@ -170,22 +169,39 @@
     }
 
     @media (max-width: 900px) {
+      :root {
+        --page-padding: 22px;
+      }
+
       .top {
-        padding: 36px 22px 28px;
+        grid-template-columns: 1fr;
+        padding: 36px var(--page-padding) 28px;
+      }
+
+      .meta-inner {
+        grid-template-columns: 1fr;
+        padding: 24px var(--page-padding);
+      }
+
+      .meta-content {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
 
       .bottom {
         grid-template-columns: 1fr;
+        padding: 0 var(--page-padding);
       }
 
       .sidebar {
         border-right: none;
         border-bottom: 1px solid var(--line);
-        padding: 28px 22px;
+        padding: 28px 0;
       }
 
       .main {
-        padding: 28px 22px 60px;
+        padding: 28px 0 60px;
       }
 
       h1 {
@@ -202,7 +218,6 @@
 <body>
   <div class="page">
 
-    <!-- TOP SECTION -->
     <div class="top">
       <div></div>
       <div class="hero">
@@ -212,24 +227,24 @@
         </div>
       </div>
 
-      <!-- AUTHORS / AFFILIATION -->
-      <div></div>
       <div class="meta-row">
-        <div>
-          <div class="meta-label">AUTHORS</div>
-          <div class="meta-value">Maya Patel & Vyshu Telukuntla</div>
-        </div>
+        <div class="meta-inner">
+          <div class="meta-content">
+            <div>
+              <div class="meta-label">AUTHORS</div>
+              <div class="meta-value">Maya Patel &amp; Vyshu Telukuntla</div>
+            </div>
 
-        <div>
-          <div class="meta-label">AFFILIATION</div>
-          <div class="meta-value">Columbia University</div>
+            <div>
+              <div class="meta-label">AFFILIATION</div>
+              <div class="meta-value">Columbia University</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- BOTTOM SECTION -->
     <div class="bottom">
-
       <aside class="sidebar">
         <h3>Contents</h3>
         <nav>
@@ -242,7 +257,6 @@
       </aside>
 
       <main class="main">
-
         <section id="introduction">
           <h2>Introduction</h2>
           <hr class="divider">
@@ -272,7 +286,6 @@
           <hr class="divider">
           <p>Add your conclusion here.</p>
         </section>
-
       </main>
     </div>
 
