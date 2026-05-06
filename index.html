@@ -334,6 +334,13 @@
           <hr class="divider">
           <h3>Baseline Model</h3>
           <p>The results of our baseline TF-IDF logistic regression model show initial performance on our classification task. Our primary metrics of success include macro-F1 scores and accuracy, which we report across all analyses. On the test set, the model obtained a macro-F1 score of 0.55, an accuracy of 0.55, a recall of 0.55, and a precision of 0.55. On the validation set, the model obtained a macro-F1 score of 0.61, which was higher than the test set performance. The classification report shows similar performance across both classes, with an F1 score of 0.56 for pre-election captions and 0.54 for post-election captions. The confusion matrix (Figure 1) demonstrates this distribution. Out of 100 pre-election captions, 57 were correctly classified, and 43 were not correctly classified; out of 100 post-election captions, 53 were correctly classified, and 47 were not correctly classified (Figure 1). We also observed a difference in performance between political figures and influencers. For political accounts, the model resulted in a higher F1 score of 0.59 and an accuracy of 0.59. For influencer accounts, the model resulted in an F1 score of 0.51 and an accuracy of 0.51</p>
+          <div class="figure">
+            <img src="1. Baseline Confusion Matrix.PNG" alt="Baseline Confusion Matrix">
+            
+            <p class="caption">
+              <strong>Figure 1.</strong> Baseline TF-IDF confusion matrices for the original and ablated logistic regression models.
+            </p>
+          </div>
           <h3>Baseline Model Ablation Experiments</h3>
           <p>Using the baseline TF-IDF logistic regression model, we identified the words most strongly associated with pre-election and post-election captions. The top pre-election words included “start,” “fox,” “do,” “excited,” “hillary,” “sayfie,” “ready,” “drive,” “guys,” and “cover.” The top post-election words included “kavanaugh,” “thank,” “christmas,” “link,” “trump,” “nation,” “now,” “out,” “tag,” and “was.” When words associated with pre-election categorization were removed, the model produced an F1 score of 0.62. When words associated with post-election categorization were removed, the model produced an F1 score of 0.60. When all 50 keywords were removed, the model produced an F1 score of 0.65, which was a significant improvement from the baseline model’s original macro-F1 score. These results are summarized in Figure 2, which shows the macro-F1 scores across all ablation conditions.</p>
           <h3>Core Model</h3>
