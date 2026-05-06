@@ -372,8 +372,38 @@
           </div>
           <h3>Core Model</h3>
           <p>The BERT model obtained a macro-F1 score of 0.64 and an accuracy of 0.65 on the test set. On the validation set, the model obtained a macro-F1 score of approximately 0.67 across training. The classification report shows an F1 score of 0.62 for pre-election captions and 0.66 for post-election captions. Additionally, as with the baseline model, performance differed across account types. For political accounts, the model achieved an F1 score of 0.71 and an accuracy of 0.71. For influencer accounts, the model achieved an F1 score of 0.58 and an accuracy of 0.58. In Figure 3, the confusion matrix shows that out of 100 pre-election captions, 59 were correctly classified, and out of 100 post-election captions, 70 were correctly classified. During training, we further monitored the training and validation loss. As shown in Figure 4, the training loss decreased from approximately 0.70 to 0.44 over the course of training, while the validation loss fluctuated between 0.61 and 0.67.</p>
+          <div class="figure">
+            <img src="3. BERT Confusion Matrix.PNG" alt="BERT Confusion Matrix">
+            
+            <p class="caption">
+              <strong>Figure 3.</strong> Confusion matrices for the baseline and ablated BERT models.
+            </p>
+          </div>
+          <div class="figure">
+            <img src="4. Figure loss curve.PNG" alt="Figure loss curve">
+            
+            <p class="caption">
+              <strong>Figure 4.</strong> The training and validation loss curves for the original and ablated BERT models. Both models show similar learning patterns, which means that the ablation plan did not substantially impact model performance.
+            </p>
+          </div>
           <h3>Core Model Ablation Experiment</h3>
           <p>On the test set, the ablated BERT model produced a macro-F1 score of 0.65 and an accuracy of 0.66. The classification report shows an F1 score of 0.63 for pre-election captions and 0.68 for post-election captions. Additionally, the confusion matrix (Figure 3) shows 59 pre-election captions correctly classified and 41 misclassified, and 72 post-election captions correctly classified and 28 misclassified. When evaluating performance across account types, the ablated model resulted in an F1 score of 0.68 and an accuracy of 0.68 for political accounts; for influencer accounts, the model resulted in an F1 score of 0.63 and an accuracy of 0.63. The difference in performance by group is well illustrated in Figure 6. During training, the training loss decreased from approximately 0.69 to 0.46, and the validation loss decreased from approximately 0.65 to 0.57 (Figure 4). Finally, we examined attention patterns for the ablated model (Figure 5).</p>
+          </div>
+          <div class="figure">
+            <img src="5. Figure loss curve.PNG" alt="Figure loss curve">
+            
+            <p class="caption">
+              <strong>Figure 5.</strong> Attention heatmaps from the original BERT (left) and ablated BERT (right) models for a sample caption. The original model and ablated model exhibit similar attention distributions across tokens, meaning that removing the high-importance words did not substantially alter how the model attends to the input.
+            </p>
+          </div>
+          </div>
+          <div class="figure">
+            <img src="6. BERT performance by group.PNG" alt="BERT performance by group">
+            
+            <p class="caption">
+              <strong>Figure 6.</strong> BERT classification performance (Macro F1 score) of original and ablated models. Politician captions show higher classification accuracy than influencer captions, with minimal change after ablation.
+            </p>
+          </div>
         </section>
 
           <section id="discussion">
