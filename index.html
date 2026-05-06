@@ -363,6 +363,13 @@
           </div>
           <h3>Baseline Model Ablation Experiments</h3>
           <p>Using the baseline TF-IDF logistic regression model, we identified the words most strongly associated with pre-election and post-election captions. The top pre-election words included “start,” “fox,” “do,” “excited,” “hillary,” “sayfie,” “ready,” “drive,” “guys,” and “cover.” The top post-election words included “kavanaugh,” “thank,” “christmas,” “link,” “trump,” “nation,” “now,” “out,” “tag,” and “was.” When words associated with pre-election categorization were removed, the model produced an F1 score of 0.62. When words associated with post-election categorization were removed, the model produced an F1 score of 0.60. When all 50 keywords were removed, the model produced an F1 score of 0.65, which was a significant improvement from the baseline model’s original macro-F1 score. These results are summarized in Figure 2, which shows the macro-F1 scores across all ablation conditions.</p>
+          <div class="figure">
+            <img src="2. Ablation Baseline Results.PNG" alt="Ablation Baseline Results">
+            
+            <p class="caption">
+              <strong>Figure 2.</strong>  Baseline ablation experiment results across different feature removal conditions. Performance slightly improves when all high-importance words are removed, indicating that individual keyword features may not fully explain classification behavior.
+            </p>
+          </div>
           <h3>Core Model</h3>
           <p>The BERT model obtained a macro-F1 score of 0.64 and an accuracy of 0.65 on the test set. On the validation set, the model obtained a macro-F1 score of approximately 0.67 across training. The classification report shows an F1 score of 0.62 for pre-election captions and 0.66 for post-election captions. Additionally, as with the baseline model, performance differed across account types. For political accounts, the model achieved an F1 score of 0.71 and an accuracy of 0.71. For influencer accounts, the model achieved an F1 score of 0.58 and an accuracy of 0.58. In Figure 3, the confusion matrix shows that out of 100 pre-election captions, 59 were correctly classified, and out of 100 post-election captions, 70 were correctly classified. During training, we further monitored the training and validation loss. As shown in Figure 4, the training loss decreased from approximately 0.70 to 0.44 over the course of training, while the validation loss fluctuated between 0.61 and 0.67.</p>
           <h3>Core Model Ablation Experiment</h3>
