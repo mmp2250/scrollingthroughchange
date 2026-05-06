@@ -390,7 +390,7 @@
           <p>On the test set, the ablated BERT model produced a macro-F1 score of 0.65 and an accuracy of 0.66. The classification report shows an F1 score of 0.63 for pre-election captions and 0.68 for post-election captions. Additionally, the confusion matrix (Figure 3) shows 59 pre-election captions correctly classified and 41 misclassified, and 72 post-election captions correctly classified and 28 misclassified. When evaluating performance across account types, the ablated model resulted in an F1 score of 0.68 and an accuracy of 0.68 for political accounts; for influencer accounts, the model resulted in an F1 score of 0.63 and an accuracy of 0.63. The difference in performance by group is well illustrated in Figure 6. During training, the training loss decreased from approximately 0.69 to 0.46, and the validation loss decreased from approximately 0.65 to 0.57 (Figure 4). Finally, we examined attention patterns for the ablated model (Figure 5).</p>
           </div>
           <div class="figure">
-            <img src="5. Figure loss curve.PNG" alt="Figure loss curve">
+            <img src="5. Attention Heatmap.PNG" alt="Attention Heatmap">
             
             <p class="caption">
               <strong>Figure 5.</strong> Attention heatmaps from the original BERT (left) and ablated BERT (right) models for a sample caption. The original model and ablated model exhibit similar attention distributions across tokens, meaning that removing the high-importance words did not substantially alter how the model attends to the input.
@@ -406,7 +406,7 @@
           </div>
         </section>
 
-          <section id="discussion">
+        <section id="discussion">
           <h2>Discussion</h2>
           <hr class="divider">
           <p>Our findings largely support our initial hypotheses, but they also revealed patterns we did not quite anticipate. Our first hypothesis, that a large language model could distinguish between captions from before and after the 2016 election, was best corroborated by the performance of our BERT model. BERT significantly outperformed our baseline, and notably, the ablated version of our BERT model (in which we removed keywords) performed best overall. As demonstrated in Figure 3, the confusion matrix for the ablated BERT model shows stronger classification performance, especially for post-election captions. These results suggest that there is a detectable distinction between pre-election and post-election language in Instagram captions. While this distinction is not extremely pronounced and the F1 scores are not perfect, it is consistent enough for a contextual model like BERT to identify. This indicates that major political events, such as the 2016 United States presidential election, may, in fact, leave a quantifiable imprint on everyday language, even in spaces like Instagram where content is not wholly political.</p>
