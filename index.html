@@ -191,6 +191,26 @@
       line-height: 1.72;
       font-weight: 300;
     }
+    .figure {
+      margin: 28px auto 36px;
+      text-align: center;
+    }
+    
+    .figure img {
+      width: 100%;
+      max-width: 620px;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+    
+    .caption {
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      opacity: 0.8;
+    }
+        
 
     @media (max-width: 900px) {
       :root {
@@ -338,7 +358,7 @@
             <img src="1. Baseline Confusion Matrix.PNG" alt="Baseline Confusion Matrix">
             
             <p class="caption">
-              <strong>Figure 1.</strong> Baseline TF-IDF confusion matrices for the original and ablated logistic regression models.
+              <strong>Figure 1.</strong> Baseline confusion matrices for the original and ablated TF-IDF logistic regression models.
             </p>
           </div>
           <h3>Baseline Model Ablation Experiments</h3>
